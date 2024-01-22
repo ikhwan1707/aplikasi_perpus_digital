@@ -89,6 +89,25 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+                        <label for="Role" class="col-sm-2 col-form-label">{{ __('Role') }}</label>
+                        <div class="col-sm-10">
+                            <select id="Role" name="Role" class="form-control @error('Role') is-invalid @enderror" required>
+                                <option value="">-- Silahkan Pilih --</option>
+                                <option value="admin">Admin</option>
+                                <option value="petugas">Petugas</option>
+                                <option value="user">User</option>
+                            </select>
+                           
+                    
+                            @error('Role')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="row justify-content-end">
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary">Simpan</button>

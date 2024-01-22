@@ -53,6 +53,7 @@ class UserController extends Controller
             'Email' => $request->Email,
             'Password' => Hash::make($request->Password),
             'Alamat' => $request->Alamat,
+            'Role'  => $request->Role == "" ? 'user' : $request->Role,
         ]);
 
         return redirect(route('user.index'))->with('success', 'Data berhasil disimpan.');
@@ -77,7 +78,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $datauseredit = User::findOrFail($id);
+        return view('User.edit', compact('datauseredit'));
     }
 
     /**
@@ -89,7 +91,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'Username' => ['required', 'string', 'max:255'],
+            'Namalengkap' => ['required', 'string', 'max:255'],
+            'Email' => ['required', 'string', 'email', 'max:255'],
+            'Password' => ['required', 'string', 'min:8'],
+            'Alamat' => ['required'],
+        ];
+
+        $this->validate($request, $rules);
+        $updateuser= User::findOrFail($id);
+        $updateuser->update([
+            'Username' => $request->Username,
+            'Namalengkap' => $request->Namalengkap,
+            'Email' => $request->Email,
+            'Password' => Hash::make($request->Password),
+            'Alamat' => $request->Alamat,
+            'Role'  => $request->Role,
+        ]);
+
+        return redirect(route('user.index'))->with('success', 'Data berhasil diubah.');
     }
 
     /**

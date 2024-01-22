@@ -12,7 +12,7 @@
   <meta name="description" content="" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/library.svg" />
+  <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/library.svg') }}" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -132,8 +132,8 @@
 
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
-          <li class="menu-item active">
-            <a href="/" class="menu-link">
+          <li class="menu-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
+            <a href="/dashboard" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -143,31 +143,31 @@
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Halaman</span>
           </li>
-          <li class="menu-item">
+          <li class="menu-item" id="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Form Master">Form Master</div>
             </a>
             <ul class="menu-sub">
 
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('kategoribuku')) ? 'active' : '' }}">
                 <a href="{{route('kategoribuku.index')}}" class="menu-link">
                   <div data-i18n="Kategori">Kategori Buku</div>
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('buku')) ? 'active' : '' }}">
                 <a href="{{route('buku.index')}}" class="menu-link">
                   <div data-i18n="Book">Buku</div>
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
                 <a href="{{route('user.index')}}" class="menu-link">
                   <div data-i18n="User">User</div>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="menu-item">
+          <li class="menu-item" id="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
               <i class="menu-icon tf-icons bx bx-detail"></i>
               <div data-i18n="Form Transaksi">Form Transaksi</div>
@@ -194,7 +194,7 @@
           <!-- Report -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
           <!-- Cards -->
-         
+
           <!-- Extended components -->
           <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -220,7 +220,7 @@
             </ul>
           </li>
 
-          
+
         </ul>
       </aside>
       <!-- / Menu -->
@@ -361,6 +361,14 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js')}}"></script>
+  {{-- <script>
+    $(document).ready(function() {
+      $('.menu-item').click(function() {
+        $('.menu-item').removeClass('active');
+        $(this).addClass('active');
+      });
+    });
+  </script> --}}
   <script>
     setTimeout(function() {
                     document.getElementById('notification').style.display = 'none';

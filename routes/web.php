@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -21,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 //KatgeoriBuku
 Route::get('/kategoribuku', 'KategoribukuController@index')->name('kategoribuku.index');
@@ -43,4 +46,6 @@ Route::delete('/buku/{id}', 'BukuController@destroy')->name('buku.destroy');
 Route::get('/user', 'UserController@index')->name('user.index');
 Route::get('/user/create', 'UserController@create')->name('user.create');
 Route::post('/user', 'UserController@store')->name('user.store');
-Route::get('/user/{id}/edit','BukuController@edit')->name('user.edit');
+Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
+Route::put('/user/{id}', 'UserController@update')->name('user.update');
+Route::delete('/user/{id}', 'UserController@destroy')->name('user.destroy');

@@ -36,7 +36,13 @@
                     <td>{{ $user->Alamat }}</td>
                     <td>{{ $user->Role}}</td>
                     <td>
-                        <a href="{{route('user.edit',$user->UserID)}}" class="btn btn-primary">Ubah</a>
+                        <form action="{{route('user.destroy', $user->UserID)}}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <a href="{{route('user.edit',$user->UserID)}}" class="btn btn-primary btn-sm">Ubah</a>
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus user ini !!!?')">Hapus</button>
+                        </form>
+
                     </td>
                 </tr>
                 @empty
