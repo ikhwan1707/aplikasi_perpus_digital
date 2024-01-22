@@ -132,92 +132,81 @@
 
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
+
+
+          <!-- Pages -->
+          <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Halaman</span>
+          </li>
           <li class="menu-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
             <a href="/dashboard" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-
-          <!-- Pages -->
-          <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Halaman</span>
-          </li>
-          <li class="menu-item" id="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Form Master">Form Master</div>
+          <li class="menu-item {{ (request()->is('kategoribuku')) ? 'active' : '' }}">
+            <a href="{{route('kategoribuku.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-category"></i>
+              <div data-i18n="Kategori">Kategori Buku</div>
             </a>
-            <ul class="menu-sub">
-
-              <li class="menu-item {{ (request()->is('kategoribuku')) ? 'active' : '' }}">
-                <a href="{{route('kategoribuku.index')}}" class="menu-link">
-                  <div data-i18n="Kategori">Kategori Buku</div>
-                </a>
-              </li>
-              <li class="menu-item {{ (request()->is('buku')) ? 'active' : '' }}">
-                <a href="{{route('buku.index')}}" class="menu-link">
-                  <div data-i18n="Book">Buku</div>
-                </a>
-              </li>
-              <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
-                <a href="{{route('user.index')}}" class="menu-link">
-                  <div data-i18n="User">User</div>
-                </a>
-              </li>
-            </ul>
           </li>
-          <li class="menu-item" id="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-detail"></i>
-              <div data-i18n="Form Transaksi">Form Transaksi</div>
+          <li class="menu-item {{ (request()->is('buku')) ? 'active' : '' }}">
+            <a href="{{route('buku.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book"></i>
+              <div data-i18n="Book">Buku</div>
             </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                  <div data-i18n="Basic">Login</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                  <div data-i18n="Basic">Register</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                  <div data-i18n="Basic">Forgot Password</div>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
+            <a href="{{route('user.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="User">User</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book-reader"></i>
+              <div data-i18n="Analytics">Peminjaman Buku</div>
+            </a>
           </li>
 
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-log-out"></i>
+              <div data-i18n="Analytics">Pengembalian Buku</div>
+            </a>
+          </li>
+
+          <li class="menu-item ">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-log-out"></i>
+              <div data-i18n="Analytics">Keluar</div>
+            </a>
+          </li>
           <!-- Report -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
           <!-- Cards -->
 
           <!-- Extended components -->
           <li class="menu-item">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons bx bx-copy"></i>
-              <div data-i18n="Extended UI">Laporan</div>
+
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book"></i>
+              <div data-i18n="Perfect Scrollbar">Laporan Data Buku</div>
             </a>
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div data-i18n="Perfect Scrollbar">Laporan Data Buku</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div data-i18n="Text Divider">Laporan Data Peminjam</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="#" class="menu-link">
-                  <div data-i18n="Text Divider">Laporan Data Peminjaman</div>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="Text Divider">Laporan Data User</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book-reader"></i>
+              <div data-i18n="Text Divider">Laporan Data Peminjaman</div>
+            </a>
+          </li>
           </li>
 
 
@@ -240,21 +229,19 @@
 
           <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
             <!-- Search -->
-            <div class="navbar-nav align-items-center">
-              <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                  aria-label="Search..." />
-              </div>
-            </div>
+
             <!-- /Search -->
 
             <ul class="navbar-nav flex-row align-items-center ms-auto">
               <!-- Place this tag where you want the button to render. -->
               <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
-                  data-icon="octicon-star" data-size="large" data-show-count="true"
-                  aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+                <span class="fw-semibold d-block">
+                  @if ( Auth::user()->Username == null )
+                  Guest Account
+                  @else
+                  {{Auth::user()->Username}}
+                  @endif
+                </span>
               </li>
 
               <!-- User -->
@@ -275,8 +262,22 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-semibold d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
+                          <span class="fw-semibold d-block">
+                            @if ( Auth::user()->Username == null )
+                           Anonymous Account
+                            @else
+                            {{Auth::user()->Username}}
+                            @endif
+                          </span>
+                          <small class="text-muted">
+                            <span class="fw-semibold d-block">
+                              @if ( Auth::user()->Role == null )
+                              Anonymous Account
+                              @else
+                              {{Auth::user()->Role}}
+                              @endif
+                            </span>
+                          </small>
                         </div>
                       </div>
                     </a>
@@ -290,21 +291,7 @@
                       <span class="align-middle">My Profile</span>
                     </a>
                   </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
-                    </a>
-                  </li>
+                  
                   <li>
                     <div class="dropdown-divider"></div>
                   </li>
