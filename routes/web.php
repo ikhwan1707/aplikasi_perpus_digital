@@ -19,9 +19,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/listbuku', 'ListbukuController@index')->name('listbuku');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

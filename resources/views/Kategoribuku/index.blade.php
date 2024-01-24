@@ -13,6 +13,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
+    {{-- <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <form class="d-flex" action="" method="POST">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-primary btn-sm" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div> --}}
     <div class="table-responsive text-nowrap">
         <table class="table">
             <thead>
@@ -30,12 +41,13 @@
                     <td>{{ $kategoribuku->NamaKategori}}</td>
                     <td>{{ $kategoribuku->created_at}}</td>
                     <td>
-                        
+
                         <form action="{{ route('kategoribuku.destroy', $kategoribuku->KategoriID) }}" method="POST"
                             class="d-inline">
                             <input type="hidden" name="_method" value="delete" />
                             {{ csrf_field() }}
-                            <a href="{{ route('kategoribuku.edit', $kategoribuku->KategoriID) }}" class="btn btn-primary btn-sm">Ubah</a>
+                            <a href="{{ route('kategoribuku.edit', $kategoribuku->KategoriID) }}"
+                                class="btn btn-primary btn-sm">Ubah</a>
                             <button type="submit" class="btn btn-sm btn-danger"
                                 onclick="return confirm('Apakah anda yakin ingin menghapus kategori ini !!!?')">Hapus</button>
                         </form>

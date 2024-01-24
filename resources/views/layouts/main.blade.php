@@ -156,6 +156,12 @@
               <div data-i18n="Book">Buku</div>
             </a>
           </li>
+          <li class="menu-item {{ (request()->is('listbuku')) ? 'active' : '' }}">
+            <a href="/listbuku" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-list-ul"></i>
+              <div data-i18n="Book">List Buku</div>
+            </a>
+          </li>
           <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
             <a href="{{route('user.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-user"></i>
@@ -236,7 +242,7 @@
               <!-- Place this tag where you want the button to render. -->
               <li class="nav-item lh-1 me-3">
                 <span class="fw-semibold d-block">
-                  @if ( Auth::user()->Username == null )
+                  @if ( Auth::user() == null )
                   Guest Account
                   @else
                   {{Auth::user()->Username}}
@@ -263,16 +269,16 @@
                         </div>
                         <div class="flex-grow-1">
                           <span class="fw-semibold d-block">
-                            @if ( Auth::user()->Username == null )
-                           Anonymous Account
+                            @if ( Auth::user() == null )
+                            Anonymous Account
                             @else
                             {{Auth::user()->Username}}
                             @endif
                           </span>
                           <small class="text-muted">
                             <span class="fw-semibold d-block">
-                              @if ( Auth::user()->Role == null )
-                              Anonymous Account
+                              @if ( Auth::user() == null )
+                              Admin
                               @else
                               {{Auth::user()->Role}}
                               @endif
@@ -291,7 +297,7 @@
                       <span class="align-middle">My Profile</span>
                     </a>
                   </li>
-                  
+
                   <li>
                     <div class="dropdown-divider"></div>
                   </li>
