@@ -104,7 +104,7 @@
                     <div class="row mb-3">
                         <label for="Deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="Deskripsi"
+                            <textarea class="form-control" name="Deskripsi" id="Deskripsi"
                                 placeholder="Deskripsi Buku">{{ $updatebuku->Deskripsi}}</textarea>
                             @error('Deskripsi')
                             <div style="color: red;">{{ $message }}</div>
@@ -124,4 +124,12 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<!-- LOAD CKEDITOR -->
+
+<script>
+    //TERAPKAN CKEDITOR PADA TEXTAREA DENGAN ID DESCRIPTION
+        CKEDITOR.replace('Deskripsi');
+</script>
 @endsection

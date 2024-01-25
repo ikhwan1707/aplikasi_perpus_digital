@@ -150,7 +150,7 @@ class BukuController extends Controller
         if ($request->hasFile('Image')) {
             $file = $request->file('Image');
             $filename = time() . Str::slug($request->judul) . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/productsuploadbukus', $filename);
+            $file->storeAs('public/uploadbukus', $filename);
             File::delete(storage_path('app/public/uploadbukus/' . $buku->Image));
         }
 

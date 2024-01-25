@@ -362,11 +362,13 @@
       });
     });
   </script> --}}
+ <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
   <script>
     setTimeout(function() {
                     document.getElementById('notification').style.display = 'none';
                 }, 5000); // Menutup notifikasi setelah 5 detik (5000 milidetik)
   </script>
+  @yield('js')
 </body>
 
 </html>
