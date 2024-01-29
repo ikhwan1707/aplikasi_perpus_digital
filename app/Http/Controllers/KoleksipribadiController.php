@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Koleksipribadi;
+use App\User;
+use App\Buku;
 
 class KoleksipribadiController extends Controller
 {
@@ -13,9 +16,12 @@ class KoleksipribadiController extends Controller
      */
     public function index()
     {
-        //
+        $Buku = Buku::with('Koleksipribadi')->get();
+
+        return view('Koleksi.index', compact('Buku'));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *

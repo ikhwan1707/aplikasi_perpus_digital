@@ -31,6 +31,10 @@ Route::get('/logout', 'AuthController@logout')->name('logout');
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/listbuku', 'ListbukuController@index')->name('listbuku');
+    Route::post('/listbuku/favorite', 'ListbukuController@favorite')->name('listbuku.favorite');
+
+    //koleksibuku
+    Route::get('/koleksibuku', 'KoleksipribadiController@index')->name('koleksibuku.index');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -60,4 +64,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/{id}/edit', 'UserController@edit')->name('user.edit');
     Route::put('/user/{id}', 'UserController@update')->name('user.update');
     Route::delete('/user/{id}', 'UserController@destroy')->name('user.destroy');
+
+    //koleksipribadi
+
 });

@@ -8,8 +8,8 @@ use App\Buku;
 
 class Koleksipribadi extends Model
 {
-    protected $table = 'tb_koleksipribadi';
-    protected $fillable = ['UserID', 'BukuID'];
+    protected $table = 'tb_koleksi_pribadi';
+    protected $fillable = ['UserID', 'BukuID', 'Status'];
 
     protected $primaryKey = 'KoleksiID';
 

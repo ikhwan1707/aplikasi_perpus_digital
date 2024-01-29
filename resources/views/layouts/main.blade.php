@@ -160,6 +160,12 @@
 
           @if(Str::length(auth()->user()) > 0)
           @if(auth()->user()->Role == "user")
+          <li class="menu-item {{ (request()->is('koleksibuku')) ? 'active' : '' }}">
+            <a href="{{route('koleksibuku.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
+              <div data-i18n="Book">Koleksi Buku</div>
+            </a>
+          </li>
           <li class="menu-item {{ (request()->is('listbuku')) ? 'active' : '' }}">
             <a href="/listbuku" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-ul"></i>
