@@ -33,7 +33,7 @@
                     <div class="row mb-3">
                         <label for="KategoriID" class="col-sm-2 col-form-label">Kategori Buku</label>
                         <div class="col-sm-10">
-                            <select class="form-select" name="KategoriID">
+                            <select class="inputbox form-select" name="KategoriID">
                                 <option value="">-- Silahkan Pilih --</option>
                                 @foreach ( $dataKategoribuku as $kategori)
                                 <option value="{{ $kategori->KategoriID }}">{{ $kategori->NamaKategori}}</option>

@@ -14,14 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::get('/', function () {
-    return view('welcome');
+Route::fallback(function () {
+    return view('errors.404');
 });
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/login', 'AuthController@showLoginForm')->name('login');
+Route::post('/login-post', 'AuthController@postLogin')->name('login.post');
+Route::get('/logout', 'AuthController@logout')->name('logout');
+
 
 Route::get('/listbuku', 'ListbukuController@index')->name('listbuku');
 

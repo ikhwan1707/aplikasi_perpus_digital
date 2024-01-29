@@ -183,7 +183,7 @@
           </li>
 
           <li class="menu-item ">
-            <a href="#" class="menu-link">
+            <a href="{{route('logout')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-log-out"></i>
               <div data-i18n="Analytics">Keluar</div>
             </a>
@@ -302,7 +302,7 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="auth-login-basic.html">
+                    <a class="dropdown-item" href="{{route('logout')}}">
                       <i class="bx bx-power-off me-2"></i>
                       <span class="align-middle">Log Out</span>
                     </a>

@@ -52,6 +52,11 @@
                 @endforelse
             </tbody>
         </table>
+        @if ($dataUser->hasPages())
+    @include('pagination', ['paginator' => $dataUser])
+@endif
     </div>
+    
+    {{-- {{ $dataUser->links() }} --}}
 </div>
 @endsection
