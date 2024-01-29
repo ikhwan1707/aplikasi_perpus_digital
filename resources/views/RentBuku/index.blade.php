@@ -24,7 +24,7 @@
 </form>
 <div class="row">
     @foreach ($Buku as $item)
-    <div class="col-sm-4 col-md-4 col-lg-4 mb-3">
+    <div class="col-sm-6 col-md-6 col-lg-4 mb-4">
         <div class="card">
             <img draggable="false" class="card-img-top" @if ($item->Image != '')
             src="{{ asset('storage/uploadbukus/'.$item->Image) }}"
@@ -38,11 +38,16 @@
                     Kode Buku: {{$item->KodeBuku}}
                 </p>
                 <div class="d-flex justify-content-between">
-                    @if (Auth::user() == '')
-                    <a href="#" class="btn btn-outline-primary btn-sm">Login</a>
-                    @else
-                    <a href="#" class="btn btn-outline-primary btn-sm">Pinjam</a>
-                    @endif
+                    <div class="demo-inline-spacing">
+                        @if (Auth::user() == '')
+                        <a href="#" class="btn btn-outline-primary btn-sm">Login</a>
+                        @else
+                        <a href="#" class="btn btn-icon btn-outline-danger btn-sm">
+                            <span class="tf-icons bx bx-heart"></span>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-sm">Pinjam</a>
+                        @endif
+                    </div>
                     <p class="card-text text-end {{$item->status == 'in Stock' ? 'text-success' : 'text-danger'}}">
                         {{$item->Status}}</p>
                 </div>
@@ -51,4 +56,5 @@
     </div>
     @endforeach
 </div>
+
 @endsection

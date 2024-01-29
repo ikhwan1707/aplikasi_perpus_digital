@@ -7,7 +7,13 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Selamat Datang di Aplikasi Perpustakaan Digital</h5>
+                            <h5 class="card-title text-primary">Selamat Datang 
+                                @if ( Auth::user() == null )
+                                Guest Account
+                                @else
+                                {{Auth::user()->Namalengkap}}
+                                @endif
+                                di Aplikasi Perpustakaan Digital</h5>
                             <p class="mb-4">
                                 Pusat Kontrol Perpustakaan Digital
                             </p>

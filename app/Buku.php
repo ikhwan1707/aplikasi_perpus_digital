@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Kategoribuku;
+use App\Koleksipribadi;
 
 class Buku extends Model
 {
@@ -25,5 +26,10 @@ class Buku extends Model
     public function Kategoribuku()
     {
         return $this->belongsTo(Kategoribuku::class, 'KategoriID', 'KategoriID');
+    }
+
+    public function Koleksipribadi()
+    {
+        return $this->hasMany(Koleksipribadi::class, 'BukuID', 'BukuID');
     }
 }

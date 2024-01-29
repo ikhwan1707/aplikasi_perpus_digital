@@ -156,12 +156,19 @@
               <div data-i18n="Book">Buku</div>
             </a>
           </li>
+
+
+          @if(Str::length(auth()->user()) > 0)
+          @if(auth()->user()->Role == "user")
           <li class="menu-item {{ (request()->is('listbuku')) ? 'active' : '' }}">
             <a href="/listbuku" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-ul"></i>
               <div data-i18n="Book">List Buku</div>
             </a>
           </li>
+
+          @endif
+          @endif
           <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
             <a href="{{route('user.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-user"></i>
@@ -362,7 +369,7 @@
       });
     });
   </script> --}}
- <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
   <script>
     setTimeout(function() {
                     document.getElementById('notification').style.display = 'none';
