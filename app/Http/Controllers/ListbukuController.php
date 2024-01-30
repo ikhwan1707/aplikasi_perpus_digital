@@ -11,20 +11,33 @@ use App\KoleksiPribadi;
 
 class ListbukuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $query = Buku::query();
+
+        // Filter berdasarkan judul buku jika search term diberikan
+        if ($request->has('title')) {
+
+            $query->where('Judul', 'like', '%' . $request->input('title') . '%');
+        }
+
+        // Filter berdasarkan kategori buku jika dipilih
+        if ($request->has('Kategoribuku')) {
+            $query->where('KategoriID', 'like', '%' . $request->input('Kategoribuku'));
+        }
+
         $Kategoribuku = Kategoribuku::all();
-        $Buku = Buku::with('Koleksipribadi')->get();
+
+        $Buku = $query->with('Koleksipribadi')->get();
         $userID = Auth::id();
-        //dd($KoleksiPribadi);
-        //$Buku = Buku::all();
+
 
         return view('RentBuku.index', compact('Kategoribuku', 'Buku', 'userID'));
     }
 
     public function favorite(Request $request, Buku $buku)
     {
-        
+
         $request->validate([
             'UserID' => 'required',
             'BukuID' => 'required',
@@ -43,7 +56,7 @@ class ListbukuController extends Controller
         if ($existingKoleksi) {
             $existingKoleksi->delete();
             return redirect()->route('listbuku')->with('warning', 'Buku dihapus dari koleksi.');
-           // return redirect()->route('listbuku')->with('warning', 'Buku sudah ada dalam koleksi pribadi.');
+            // return redirect()->route('listbuku')->with('warning', 'Buku sudah ada dalam koleksi pribadi.');
         }
 
         Koleksipribadi::create([

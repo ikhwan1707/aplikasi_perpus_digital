@@ -16,9 +16,9 @@ class KoleksipribadiController extends Controller
      */
     public function index()
     {
-        $Buku = Buku::with('Koleksipribadi')->get();
-
-        return view('Koleksi.index', compact('Buku'));
+        //$Buku = Buku::with('Koleksipribadi')->get();
+        $koleksiPribadi = KoleksiPribadi::with(['User', 'Buku'])->get();
+        return view('Koleksi.index', compact('koleksiPribadi'));
     }
 
     
@@ -85,6 +85,7 @@ class KoleksipribadiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        KoleksiPribadi::destroy($id);
+        return redirect()->route('koleksibuku.index')->with('success', 'Buku berhasil dihapus dari koleksi pribadi.');
     }
 }

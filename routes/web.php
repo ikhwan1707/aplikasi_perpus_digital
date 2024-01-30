@@ -35,6 +35,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
 
     //koleksibuku
     Route::get('/koleksibuku', 'KoleksipribadiController@index')->name('koleksibuku.index');
+    Route::delete('/koleksibuku/{id}', 'KoleksipribadiController@destroy')->name('koleksibuku.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

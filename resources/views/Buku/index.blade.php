@@ -110,6 +110,7 @@
                                 '<img src="storage/uploadbukus/' + response.buku.Image + '" alt="' + response.buku.Judul + '" class="card-img-top">' +
                                 '<div class="card-body">'+
                                     '<h5 class="card-title">'+ response.buku.Judul +'</h5>'+
+                                    '<p class="card-title">'+ response.buku.Penulis +'</p>'+
                                     '<p class="card-text">'+ response.buku.Deskripsi +'</p>' +
                                 '</div>' +
                             '</div>'+
