@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Koleksipribadi;
 use App\Ulasanbuku;
+use App\Peminjaman;
 
 class User extends Authenticatable
 {
@@ -48,5 +49,10 @@ class User extends Authenticatable
     public function ulasan()
     {
         return $this->hasMany(Ulasanbuku::class, 'BukuID', 'BukuID');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'UserID','UserID');
     }
 }

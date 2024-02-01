@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Kategoribuku;
 use App\Koleksipribadi;
 use App\Ulasanbuku;
+use App\Peminjaman;
 
 class Buku extends Model
 {
@@ -37,5 +38,10 @@ class Buku extends Model
     public function ulasan()
     {
         return $this->hasMany(Ulasanbuku::class, 'BukuID', 'BukuID');
+    }
+
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'BukuID', 'BukuID');
     }
 }

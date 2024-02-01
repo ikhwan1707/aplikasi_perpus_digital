@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
   <!-- Page CSS -->
-<link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css')}}" />
+  <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css')}}" />
   <!-- Helpers -->
   <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -138,12 +138,15 @@
           <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Halaman</span>
           </li>
+          @if(Str::length(auth()->user()) > 0)
+          @if(auth()->user()->Role == "admin")
           <li class="menu-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
             <a href="/dashboard" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
+
           <li class="menu-item {{ (request()->is('kategoribuku')) ? 'active' : '' }}">
             <a href="{{route('kategoribuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-category"></i>
@@ -157,9 +160,29 @@
             </a>
           </li>
 
+          <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
+            <a href="{{route('user.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="User">User</div>
+            </a>
+          </li>
+          <li class="menu-item {{ (request()->is('riwayatpeminjaman')) ? 'active' : '' }}">
+            <a href="{{route('peminjaman.riwayatPeminjaman')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book-reader"></i>
+              <div data-i18n="Analytics">Peminjaman Buku</div>
+            </a>
+          </li>
 
-          @if(Str::length(auth()->user()) > 0)
-          @if(auth()->user()->Role == "user")
+          <li class="menu-item {{ (request()->is('riwayatpengembalian')) ? 'active' : '' }}">
+            <a href="{{ route('peminjaman.riwayatPengembalian') }}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-log-out"></i>
+              <div data-i18n="Analytics">Pengembalian Buku</div>
+            </a>
+          </li>
+
+
+          {{-- @if(auth()->user()->Role == "user") --}}
+          @else
           <li class="menu-item {{ (request()->is('koleksibuku')) ? 'active' : '' }}">
             <a href="{{route('koleksibuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
@@ -175,25 +198,7 @@
 
           @endif
           @endif
-          <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
-            <a href="{{route('user.index')}}" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-user"></i>
-              <div data-i18n="User">User</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-book-reader"></i>
-              <div data-i18n="Analytics">Peminjaman Buku</div>
-            </a>
-          </li>
 
-          <li class="menu-item">
-            <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-log-out"></i>
-              <div data-i18n="Analytics">Pengembalian Buku</div>
-            </a>
-          </li>
 
           <li class="menu-item ">
             <a href="{{route('logout')}}" class="menu-link">
@@ -201,6 +206,8 @@
               <div data-i18n="Analytics">Keluar</div>
             </a>
           </li>
+          @if(Str::length(auth()->user()) > 0)
+          @if(auth()->user()->Role == "admin")
           <!-- Report -->
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
           <!-- Cards -->
@@ -227,6 +234,8 @@
             </a>
           </li>
           </li>
+          @endif
+          @endif
 
 
         </ul>

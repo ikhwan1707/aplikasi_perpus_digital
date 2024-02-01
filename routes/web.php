@@ -30,15 +30,20 @@ Route::post('/login-post', 'AuthController@postLogin')->name('login.post');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
+
     Route::get('/listbuku', 'ListbukuController@index')->name('listbuku');
     Route::post('/listbuku/favorite', 'ListbukuController@favorite')->name('listbuku.favorite');
 
     //koleksibuku
     Route::get('/koleksibuku', 'KoleksipribadiController@index')->name('koleksibuku.index');
     Route::delete('/koleksibuku/{id}', 'KoleksipribadiController@destroy')->name('koleksibuku.destroy');
+
+    //peminjaman
+    Route::get('/peminjaman/{id}', 'PeminjamanController@index')->name('peminjaman.index');
+    Route::post('/peminjaman', 'PeminjamanController@pinjamBuku')->name('peminjaman.pinjamBuku');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     //KatgeoriBuku
@@ -66,6 +71,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/{id}', 'UserController@update')->name('user.update');
     Route::delete('/user/{id}', 'UserController@destroy')->name('user.destroy');
 
-    //koleksipribadi
-
+    //peminjaman
+    Route::get('/riwayatpeminjaman', 'PeminjamanController@riwayatPeminjaman')->name('peminjaman.riwayatPeminjaman');
+    Route::get('/riwayatpengembalian', 'PeminjamanController@riwayatPengembalian')->name('peminjaman.riwayatPengembalian');
+    Route::post('/kembalikanbuku', 'PeminjamanController@kembalikanBuku')->name('peminjaman.kembalikanBuku');
 });

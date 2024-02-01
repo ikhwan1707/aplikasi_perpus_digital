@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
-                            <img src="../assets/img/illustrations/man-with-laptop-light.png" height="140"
+                            <img src="{{ asset('assets/img/illustrations/man-with-laptop-light.png')}}" height="140"
                                 alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
                                 data-app-light-img="illustrations/man-with-laptop-light.png" />
 
@@ -37,7 +37,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="chart success"
                                 class="rounded" />
                         </div>
                         <div class="dropdown">
@@ -61,7 +61,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -104,12 +104,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-12 col-4 mb-4">
+        <div class="col-lg-3 col-md-12 col-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/wallet-info.png" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -127,12 +127,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-4 mb-4">
+        <div class="col-lg-3 col-md-12 col-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/chart-success.png" alt="chart success"
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="chart success"
                                 class="rounded" />
                         </div>
                         <div class="dropdown">
@@ -151,12 +151,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-4 mb-4">
+        <div class="col-lg-3 col-md-12 col-4 mb-4">
             <div class="card">
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -169,8 +169,31 @@
                             </div>
                         </div>
                     </div>
-                    <span class="fw-semibold d-block mb-1">Data Peminjaman dan Pengembalian</span>
-                    <h3 class="card-title mb-2">0</h3>
+                    <span class="fw-semibold d-block mb-1">Data Peminjaman</span>
+                    <h3 class="card-title mb-2">{{$countdipinjam}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title d-flex align-items-start justify-content-between">
+                        <div class="avatar flex-shrink-0">
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                <a class="dropdown-item" href="#">Selengkapnya</a>
+        
+                            </div>
+                        </div>
+                    </div>
+                    <span class="fw-semibold d-block mb-1">Data Pengembalian</span>
+                    <h3 class="card-title mb-2">{{$countdikembalikan}}</h3>
                 </div>
             </div>
         </div>
@@ -189,10 +212,25 @@
                             <th>Buku</th>
                             <th>Tanggal Peminjaman</th>
                             <th>Tanggal Pengembalian</th>
+                            <th>Status</th>
     
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                        @forelse($datapeminjam as $peminjaman)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $peminjaman->user->Username }}</td>
+                                <td>{{ $peminjaman->buku->Judul }}</td>
+                                <td>{{ $peminjaman->TanggalPeminjaman }}</td>
+                                <td>{{ $peminjaman->TanggalPengembalian }}</td>
+                                <td>{{ $peminjaman->StatusPeminjaman }}</td>
+                            </tr>
+                        @empty
+                           <tr>
+                            <td colspan="5">Data Peminjaman Kosong.</td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

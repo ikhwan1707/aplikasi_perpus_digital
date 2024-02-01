@@ -26,7 +26,11 @@ class AuthController extends Controller
         if ($user && Hash::check($request->input('Password'), $user->Password)) {
             Auth::login($user);
             //dd(Auth::user()->Role);
-            return redirect()->intended('/dashboard')->with('success', 'You have Successfully loggedin');
+            if (Auth::user()->Role == 'admin') {
+                return redirect()->intended('/dashboard')->with('success', 'You have Successfully loggedin');
+            } else {
+                return redirect()->intended('/listbuku')->with('success', 'You have Successfully loggedin');
+            }
         } else {
             return redirect()->route('login')->with('success', 'Invalid login credentials');
         }

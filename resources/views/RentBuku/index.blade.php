@@ -97,10 +97,8 @@
 
                         @endif
 
-                        <form action="{{ route('listbuku.favorite') }}" method="post">
-                            {{ csrf_field() }}
-                            <button class="btn btn-outline-primary btn-sm">Pinjam</button>
-                        </form>
+                        
+                            <a href="{{route('peminjaman.index',$buku->BukuID)}}" class="{{$buku->Stock == 0 ? 'btn btn-outline-danger btn-sm disabled' : 'btn btn-outline-primary btn-sm'}} ">Pinjam</a>
                     </form>
 
                     @endif
