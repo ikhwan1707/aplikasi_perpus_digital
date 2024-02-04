@@ -41,6 +41,11 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     //peminjaman
     Route::get('/peminjaman/{id}', 'PeminjamanController@index')->name('peminjaman.index');
     Route::post('/peminjaman', 'PeminjamanController@pinjamBuku')->name('peminjaman.pinjamBuku');
+
+    //ulasan
+    Route::get('/ulasan/{id}', 'UlasanbukuController@create')->name('ulasan.create');
+    Route::post('/ulasan', 'UlasanbukuController@store')->name('ulasan.store');
+    Route::get('/ulasan/{id}/show', 'UlasanbukuController@show')->name('ulasan.show');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

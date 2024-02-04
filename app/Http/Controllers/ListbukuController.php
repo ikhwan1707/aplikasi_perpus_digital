@@ -27,9 +27,13 @@ class ListbukuController extends Controller
         }
 
         $Kategoribuku = Kategoribuku::all();
-
-        $Buku = $query->with('Koleksipribadi')->get();
         $userID = Auth::id();
+        $Buku = $query->with(['Koleksipribadi', 'peminjaman' => function ($query) use ($userID) {
+            $query->where('UserID', $userID);
+        }])->get();
+        // foreach ($Buku as $buku) {
+        //     dd($buku->peminjaman->first()->StatusPeminjaman);    
+        // }
 
 
         return view('RentBuku.index', compact('Kategoribuku', 'Buku', 'userID'));

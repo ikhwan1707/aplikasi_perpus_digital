@@ -8,7 +8,7 @@ class Peminjaman extends Model
 {
     protected $table = 'tb_peminjaman';
     protected $primaryKey = 'PeminjamanID';
-    protected $fillable = ['UserID', 'BukuID', 'TanggalPeminjaman', 'TanggalPengembalian','StatusPeminjaman'];
+    protected $fillable = ['UserID', 'BukuID', 'TanggalPeminjaman', 'TanggalPengembalian','StatusPeminjaman', 'Tanggalpengembalianaktual'];
 
     public function user()
     {

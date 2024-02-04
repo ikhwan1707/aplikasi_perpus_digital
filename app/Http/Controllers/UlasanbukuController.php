@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Ulasanbuku;
 use Illuminate\Http\Request;
+use App\Ulasanbuku;
+use App\Buku;
+use App\Peminjaman;
 
 class UlasanbukuController extends Controller
 {
@@ -14,7 +16,6 @@ class UlasanbukuController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -22,9 +23,11 @@ class UlasanbukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $buku = Buku::findOrFail($id);
+
+        return view('ulasanbuku.create', compact('buku'));
     }
 
     /**
@@ -35,7 +38,40 @@ class UlasanbukuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi request
+        $request->validate([
+            'Ulasan' => 'required',
+            'Rating' => 'required|integer|min:1|max:5', // Rating harus di antara 1 dan 5
+        ]);
+
+        // Cek apakah user sudah membrikan ulasan atau belum
+        // $peminjaman = Peminjaman::where('UserID', $request->UserID)
+        // ->where('BukuID', $request->BukuID)
+        // ->where('StatusPeminjaman', 'dikembalikan')
+        // ->first();
+
+        // if (!$peminjaman) {
+        //     return redirect()->back()->with('error', 'Anda belum meminjam buku ini atau belum mengembalikannya.');
+        // }
+
+        // Cek apakah user sudah memberikan ulasan sebelumnya
+        $ulasanSudahAda = UlasanBuku::where('UserID', $request->UserID)
+            ->where('BukuID', $request->BukuID)
+            ->exists();
+
+        if ($ulasanSudahAda) {
+            return redirect()->back()->with('error', 'Anda sudah memberikan ulasan untuk buku ini sebelumnya.');
+        }
+
+        // Simpan ulasan
+        UlasanBuku::create([
+            'UserID' => $request->UserID,
+            'BukuID' => $request->BukuID,
+            'Ulasan' => $request->Ulasan,
+            'Rating' => $request->Rating,
+        ]);
+
+        return redirect(route('listbuku'))->with('success', 'Ulasan berhasil disimpan.');
     }
 
     /**
@@ -44,9 +80,12 @@ class UlasanbukuController extends Controller
      * @param  \App\Ulasanbuku  $ulasanbuku
      * @return \Illuminate\Http\Response
      */
-    public function show(Ulasanbuku $ulasanbuku)
+    public function show($id)
     {
-        //
+        $bukuShow = Buku::findOrFail($id);
+        $jumlahPeminjaman = Peminjaman::where('BukuID', $id)->count();
+        $jumlahUlasan = Ulasanbuku::where('BukuID', $id)->count();
+        return view('ulasanbuku.show', compact('bukuShow', 'jumlahPeminjaman','jumlahUlasan'));
     }
 
     /**

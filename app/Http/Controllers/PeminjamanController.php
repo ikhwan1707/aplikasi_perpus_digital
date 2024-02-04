@@ -81,7 +81,7 @@ class PeminjamanController extends Controller
         // Periksa apakah stok sekarang 0
         if ($buku->Stock == 0) {
             // Jika stok habis, ubah status buku menjadi tidak tersedia
-            $buku->update(['Status' => 'tidak tersedia']);
+            $buku->update(['Status' => 'Tidak tersedia']);
         }
 
         return redirect(route('listbuku'))->with('success', 'Buku berhasil dipinjam.');
@@ -102,16 +102,20 @@ class PeminjamanController extends Controller
             return redirect()->back()->with('error', 'Buku sudah dikembalikan sebelumnya.');
         }
 
-        // Update status peminjaman menjadi 'kembali'
-        $peminjaman->update(['StatusPeminjaman' => 'dikembalikan']);
+        // Update status peminjaman menjadi 'kembali' dan Update tanggal
+        $tanggalPengembalianAktual = Carbon::now();
+        $peminjaman->update([
+            'StatusPeminjaman' => 'dikembalikan',
+            'Tanggalpengembalianaktual' => $tanggalPengembalianAktual
+        ]);
 
         // Tambahkan stok buku
         $buku = Buku::find($peminjaman->BukuID);
         $buku->increment('Stock');
 
         // Update tanggal pengembalian aktual
-        $tanggalPengembalianAktual = Carbon::now();
-        $peminjaman->update(['Tanggalpengembalianaktual' => $tanggalPengembalianAktual]);
+
+        // $peminjaman->update(['Tanggalpengembalianaktual' => $tanggalPengembalianAktual]);
 
         return redirect()->back()->with('success', 'Buku berhasil dikembalikan.');
     }
