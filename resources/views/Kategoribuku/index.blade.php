@@ -60,9 +60,10 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="mt-2">
+            {{ $dataKategoriBuku->links() }}
+        </div>
     </div>
-    <div class="mt-4 p-4 box has-text-centered">
-        {{ $dataKategoriBuku->links() }}
-    </div>
+
 </div>
 @endsection

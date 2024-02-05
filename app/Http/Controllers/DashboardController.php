@@ -24,12 +24,11 @@ class DashboardController extends Controller
         $countPeminjam = User::where('Role', 'user')->count();
         $countAdmin = User::where('Role', 'admin')->count();
         $countPetugas = User::where('Role', 'petugas')->count();
-        $countdipinjam = Peminjaman::where('StatusPeminjaman','dipinjam')->count();
-        $countdikembalikan= Peminjaman::where('StatusPeminjaman', 'dikembalikan')->count();
-        $datapeminjam = Peminjaman::all();
-        
+        $countdipinjam = Peminjaman::where('StatusPeminjaman', 'dipinjam')->count();
+        $countdikembalikan = Peminjaman::where('StatusPeminjaman', 'dikembalikan')->count();
+
+        $datapeminjam = Peminjaman::with(['user', 'buku'])->orderBy('created_at', 'desc')->paginate(10);
+
         return view('dashboard', compact('countBuku', 'countKategori', 'countPeminjam', 'countAdmin', 'countPetugas', 'datapeminjam', 'countdipinjam', 'countdikembalikan'));
     }
-
-    
 }

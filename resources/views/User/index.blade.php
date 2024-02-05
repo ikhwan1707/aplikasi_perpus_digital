@@ -40,7 +40,8 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="DELETE" />
                             <a href="{{route('user.edit',$user->UserID)}}" class="btn btn-primary btn-sm">Ubah</a>
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus user ini !!!?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Apakah anda yakin ingin menghapus user ini !!!?')">Hapus</button>
                         </form>
 
                     </td>
@@ -52,11 +53,13 @@
                 @endforelse
             </tbody>
         </table>
-        @if ($dataUser->hasPages())
-    @include('pagination', ['paginator' => $dataUser])
-@endif
+        <div class="mt-2">
+            @if ($dataUser->hasPages())
+            @include('pagination', ['paginator' => $dataUser])
+            @endif
+        </div>
     </div>
-    
+
     {{-- {{ $dataUser->links() }} --}}
 </div>
 @endsection

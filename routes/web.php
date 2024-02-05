@@ -21,9 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::fallback(function () {
     return view('errors.404');
 });
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::get('/', function () {
+    return redirect(route('login'));
+});
 
 Route::get('/login', 'AuthController@showLoginForm')->name('login');
 Route::post('/login-post', 'AuthController@postLogin')->name('login.post');
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::post('/peminjaman', 'PeminjamanController@pinjamBuku')->name('peminjaman.pinjamBuku');
 
     //ulasan
+    Route::get('/ulasan', 'UlasanbukuController@index')->name('ulasan.index');
     Route::get('/ulasan/{id}', 'UlasanbukuController@create')->name('ulasan.create');
     Route::post('/ulasan', 'UlasanbukuController@store')->name('ulasan.store');
     Route::get('/ulasan/{id}/show', 'UlasanbukuController@show')->name('ulasan.show');

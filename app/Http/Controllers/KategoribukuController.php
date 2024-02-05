@@ -14,7 +14,7 @@ class KategoribukuController extends Controller
      */
     public function index()
     {
-        $dataKategoriBuku = Kategoribuku::paginate(10);
+        $dataKategoriBuku = Kategoribuku::orderBy('created_at', 'desc')->paginate(10);
         return view('Kategoribuku.index', compact('dataKategoriBuku'));
     }
 

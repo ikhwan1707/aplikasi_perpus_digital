@@ -46,8 +46,9 @@
                                 <small class="text-light fw-semibold">({{$jumlahPeminjaman}})</small>
                             </li>
                             <li class="list-inline-item rating"><i class="fas fa-star"></i>
-                                {{ $averageRating }}
-                                <small class="text-light fw-semibold">({{ $averageRating }}
+                                {{ (!$averageRating) ? '0' : $averageRating }}
+                                <small class="text-light fw-semibold">(
+                                    {{ (!$averageRating) ? '0' : $averageRating }}
                                     rating)</small>
                             </li>
                             <li class="list-inline-item">Ulasan
@@ -75,9 +76,22 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="navs-justified-detail" role="tabpanel">
-                                    <p class="mb-0">
-                                        {!!$bukuShow->Deskripsi!!}
+                                    <p class="fw-semibold d-block mb-0">Penulis:
+                                        <small class="text-muted">{{$bukuShow->Penulis}}</small>
                                     </p>
+                                    <p class="fw-semibold d-block mb-0">Penerbit:
+                                        <small class="text-muted">{{$bukuShow->Penerbit}}</small>
+                                    </p>
+                                    <p class="fw-semibold d-block mb-0">Tahun Terbit:
+                                        <small class="text-muted">{{$bukuShow->TahunTerbit}}</small>
+                                    </p>
+                                    <div class="flex-grow-1">
+                                        <span class="fw-semibold d-block">Deskripsi:</span>
+                                        <p class="mb-0">
+                                            {!!$bukuShow->Deskripsi!!}
+                                        </p>
+                                    </div>
+
                                 </div>
                                 <div class="tab-pane fade" id="navs-justified-ulasan" role="tabpanel">
                                     <p>

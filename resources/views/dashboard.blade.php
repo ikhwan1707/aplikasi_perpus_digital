@@ -7,7 +7,7 @@
                 <div class="d-flex align-items-end row">
                     <div class="col-sm-7">
                         <div class="card-body">
-                            <h5 class="card-title text-primary">Selamat Datang 
+                            <h5 class="card-title text-primary">Selamat Datang
                                 @if ( Auth::user() == null )
                                 Guest Account
                                 @else
@@ -61,7 +61,8 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card"
+                                class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -84,7 +85,8 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card"
+                                class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -109,7 +111,8 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card"
+                                class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -156,7 +159,8 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card"
+                                class="rounded" />
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -164,7 +168,7 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="#">Selengkapnya</a>
+                                <a class="dropdown-item" href="/riwayatpeminjaman">Selengkapnya</a>
 
                             </div>
                         </div>
@@ -179,16 +183,17 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card" class="rounded" />
+                            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="Credit Card"
+                                class="rounded" />
                         </div>
                         <div class="dropdown">
-                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="#">Selengkapnya</a>
-        
+                                <a class="dropdown-item" href="/riwayatpengembalian">Selengkapnya</a>
+
                             </div>
                         </div>
                     </div>
@@ -203,36 +208,37 @@
             <h5 class="mb-0">Riwayat Peminjaman</h5>
         </div>
         <div class="table-responsive text-nowrap">
-            <div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Username</th>
-                            <th>Buku</th>
-                            <th>Tanggal Peminjaman</th>
-                            <th>Tanggal Pengembalian</th>
-                            <th>Status</th>
-    
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                        @forelse($datapeminjam as $peminjaman)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $peminjaman->user->Username }}</td>
-                                <td>{{ $peminjaman->buku->Judul }}</td>
-                                <td>{{ $peminjaman->TanggalPeminjaman }}</td>
-                                <td>{{ $peminjaman->TanggalPengembalian }}</td>
-                                <td>{{ $peminjaman->StatusPeminjaman }}</td>
-                            </tr>
-                        @empty
-                           <tr>
-                            <td colspan="5">Data Peminjaman Kosong.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Username</th>
+                        <th>Buku</th>
+                        <th>Tanggal Peminjaman</th>
+                        <th>Tanggal Pengembalian</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @forelse($datapeminjam as $peminjaman)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $peminjaman->user->Username }}</td>
+                        <td>{{ $peminjaman->buku->Judul }}</td>
+                        <td>{{ $peminjaman->TanggalPeminjaman }}</td>
+                        <td>{{ $peminjaman->TanggalPengembalian }}</td>
+                        <td>{{ $peminjaman->StatusPeminjaman }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5">Data Peminjaman Kosong.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            <div class="mt-2">
+                {{ $datapeminjam->links() }}
             </div>
         </div>
     </div>

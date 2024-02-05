@@ -33,7 +33,7 @@
                     <div class="row mb-3">
                         <label for="KategoriID" class="col-sm-2 col-form-label">Kategori Buku</label>
                         <div class="col-sm-10">
-                            <select class="inputbox form-select" name="KategoriID">
+                            <select class="form-select kategori-select" name="KategoriID">
                                 <option value="">-- Silahkan Pilih --</option>
                                 @foreach ( $dataKategoribuku as $kategori)
                                 <option value="{{ $kategori->KategoriID }}">{{ $kategori->NamaKategori}}</option>
@@ -67,7 +67,8 @@
                     <div class="row mb-3">
                         <label for="TahunTerbit" class="col-sm-2 col-form-label">Tahun Terbit</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="TahunTerbit" maxlength="4" value="{{ old('TahunTerbit') }}">
+                            <input type="text" class="form-control" name="TahunTerbit" maxlength="4"
+                                value="{{ old('TahunTerbit') }}">
                             @error('TahunTerbit')
                             <div style="color: red;">{{ $message }}</div>
                             @enderror
@@ -76,7 +77,8 @@
                     <div class="row mb-3">
                         <label for="Stock" class="col-sm-2 col-form-label">Stock</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Stock" placeholder="Stock" value="{{ old('Stock') }}">
+                            <input type="text" class="form-control" name="Stock" placeholder="Stock"
+                                value="{{ old('Stock') }}">
                             @error('Stock')
                             <div style="color: red;">{{ $message }}</div>
                             @enderror

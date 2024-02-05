@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Ulasanbuku;
 use App\Buku;
 use App\Peminjaman;
+use Illuminate\Support\Facades\Auth;
 
 class UlasanbukuController extends Controller
 {
@@ -16,6 +17,12 @@ class UlasanbukuController extends Controller
      */
     public function index()
     {
+        $UserID = Auth::id();
+        $datapeminjam = Peminjaman::where('UserID', $UserID)->get();
+
+
+
+        return view('ulasanbuku.index', compact('datapeminjam'));
     }
 
     /**
@@ -85,7 +92,7 @@ class UlasanbukuController extends Controller
         $bukuShow = Buku::findOrFail($id);
         $jumlahPeminjaman = Peminjaman::where('BukuID', $id)->count();
         $jumlahUlasan = Ulasanbuku::where('BukuID', $id)->count();
-        return view('ulasanbuku.show', compact('bukuShow', 'jumlahPeminjaman','jumlahUlasan'));
+        return view('ulasanbuku.show', compact('bukuShow', 'jumlahPeminjaman', 'jumlahUlasan'));
     }
 
     /**

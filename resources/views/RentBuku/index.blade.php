@@ -59,7 +59,8 @@
 <div class="row">
     @foreach ($Buku as $buku)
     <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-        <div class="card card-square">
+        <div class="card card-square" onclick="window.location='{{ route('ulasan.show', $buku->BukuID) }}'"
+            style="cursor: pointer;">
             <div class="card-img-container" style="width: 100%; padding-top: 100%; position: relative;">
                 <img draggable="false" class="card-img-top" @if ($buku->Image != '')
                 src="{{ asset('storage/uploadbukus/'.$buku->Image) }}"
@@ -81,9 +82,9 @@
                         @elseif ($i - 0.5 <= $averageRating) <i class="fas fa-star-half-alt"></i>
                             @else
                             <i class="far fa-star"></i>
-                        @endif
-                    @endfor
-                    <span style="font-size: 12px;">{{ $averageRating }}</span>
+                            @endif
+                            @endfor
+                            <span style="font-size: 12px;">{{ $averageRating }}</span>
                 </div>
                 @endif
                 <span class="card-text"> Kode Buku: {{$buku->KodeBuku}}</span>
@@ -117,16 +118,19 @@
 
                         @if ($buku->peminjaman && $buku->peminjaman->isNotEmpty())
                         {{-- Tombol Beri Ulasan --}}
-                        @if ($buku->peminjaman->first()->StatusPeminjaman == 'dikembalikan')
-                            @if ($buku->ulasan->isNotEmpty())
-                            <a href="{{ route('ulasan.show', $buku->BukuID) }}" class="btn btn-outline-warning btn-sm">
-                                Lihat Ulasan
-                            </a>
-                            @else
-                            <a href="{{ route('ulasan.create', $buku->BukuID) }}" class="btn btn-outline-warning btn-sm">
-                                Beri Ulasan
-                            </a>
-                            @endif
+                        @if ($buku->peminjaman->first()->StatusPeminjaman == 'dikembalikan' && $buku->ulasan->isEmpty())
+                        <a href="{{ route('ulasan.create', $buku->BukuID) }}" class="btn btn-outline-warning btn-sm">
+                            Beri Ulasan
+                        </a>
+                        {{-- @if ($buku->ulasan->isNotEmpty())
+                        <a href="{{ route('ulasan.show', $buku->BukuID) }}" class="btn btn-outline-warning btn-sm">
+                            Lihat Ulasan
+                        </a>
+                        @else
+                        <a href="{{ route('ulasan.create', $buku->BukuID) }}" class="btn btn-outline-warning btn-sm">
+                            Beri Ulasan
+                        </a>
+                        @endif --}}
                         @endif
                         @endif
                     </form>

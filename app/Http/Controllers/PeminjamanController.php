@@ -29,7 +29,7 @@ class PeminjamanController extends Controller
 
     public function riwayatPengembalian()
     {
-        $datapengembalian = Peminjaman::where('StatusPeminjaman', 'dikembalikan')->get();
+        $datapengembalian = Peminjaman::where('StatusPeminjaman', 'dikembalikan')->orderBy('created_at', 'desc')->paginate(10);
         return view('Peminjaman.pengembalian', compact('datapengembalian'));
     }
     public function pinjamBuku(Request $request)
@@ -84,7 +84,7 @@ class PeminjamanController extends Controller
             $buku->update(['Status' => 'Tidak tersedia']);
         }
 
-        return redirect(route('listbuku'))->with('success', 'Buku berhasil dipinjam.');
+        return redirect(route('ulasan.index'))->with('success', 'Buku berhasil dipinjam.');
     }
 
     public function kembalikanBuku(Request $request)

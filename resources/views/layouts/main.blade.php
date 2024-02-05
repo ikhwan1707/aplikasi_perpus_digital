@@ -186,6 +186,12 @@
 
           {{-- @if(auth()->user()->Role == "user") --}}
           @else
+          <li class="menu-item {{ (request()->is('ulasan')) ? 'active' : '' }}">
+            <a href="{{route('ulasan.index')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
+              <div data-i18n="Book">Riwayat Peminjaman</div>
+            </a>
+          </li>
           <li class="menu-item {{ (request()->is('koleksibuku')) ? 'active' : '' }}">
             <a href="{{route('koleksibuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-bookmark"></i>

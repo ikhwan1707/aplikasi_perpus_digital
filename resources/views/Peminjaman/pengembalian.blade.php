@@ -36,6 +36,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="mt-2">
+            {{ $datapengembalian->links() }}
+        </div>
     </div>
 </div>
 @endsection

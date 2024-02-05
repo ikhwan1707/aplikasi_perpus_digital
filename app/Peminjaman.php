@@ -20,4 +20,9 @@ class Peminjaman extends Model
     {
         return $this->belongsTo(Buku::class, 'BukuID', 'BukuID');
     }
+
+    public function ulasan()
+    {
+        return $this->hasOne(UlasanBuku::class, 'BukuID', 'BukuID')->where('UserID', $this->UserID);
+    }
 }

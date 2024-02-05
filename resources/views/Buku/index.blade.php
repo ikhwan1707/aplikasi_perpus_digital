@@ -58,7 +58,8 @@
                                 Lihat
                             </button>
                             <a href="{{route('buku.edit',$buku->BukuID)}}" class="btn btn-primary btn-sm">Ubah</a>
-                            <button type="submit" name="hapus" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus Buku ini !!!?')">Hapus</button>
+                            <button type="submit" name="hapus" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Apakah anda yakin ingin menghapus Buku ini !!!?')">Hapus</button>
                         </form>
                     </td>
                 </tr>
@@ -69,10 +70,12 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="mt-2">
+            {{ $dataBuku->links() }}
+        </div>
+
     </div>
-    <div class="mt-4 p-4 box has-text-centered">
-        {{ $dataBuku->links() }}
-    </div>
+
 
     <div class="modal fade" id="backDropModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog">
