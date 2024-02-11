@@ -92,7 +92,8 @@ class UlasanbukuController extends Controller
         $bukuShow = Buku::findOrFail($id);
         $jumlahPeminjaman = Peminjaman::where('BukuID', $id)->count();
         $jumlahUlasan = Ulasanbuku::where('BukuID', $id)->count();
-        return view('ulasanbuku.show', compact('bukuShow', 'jumlahPeminjaman', 'jumlahUlasan'));
+        $ulasan = Ulasanbuku::where('BukuID', $id)->get();
+        return view('ulasanbuku.show', compact('bukuShow', 'jumlahPeminjaman', 'jumlahUlasan', 'ulasan'));
     }
 
     /**

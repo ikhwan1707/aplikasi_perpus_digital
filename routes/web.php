@@ -82,4 +82,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/riwayatpeminjaman', 'PeminjamanController@riwayatPeminjaman')->name('peminjaman.riwayatPeminjaman');
     Route::get('/riwayatpengembalian', 'PeminjamanController@riwayatPengembalian')->name('peminjaman.riwayatPengembalian');
     Route::post('/kembalikanbuku', 'PeminjamanController@kembalikanBuku')->name('peminjaman.kembalikanBuku');
+
+    //Laporanbuku
+    Route::get('/laporanbuku', 'BukuController@indexReport')->name('laporanbuku.index');
+    Route::get('/laporanbuku/pdf', 'BukuController@generatebukuPdf')->name('laporanbuku.pdf');
 });

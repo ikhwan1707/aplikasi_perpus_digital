@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Buku;
 use App\Kategoribuku;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -19,6 +22,39 @@ class BukuController extends Controller
     {
         $dataBuku = Buku::with(['Kategoribuku'])->orderBy('created_at', 'desc')->paginate(10);
         return view('Buku.index', compact('dataBuku'));
+    }
+
+    public function indexReport()
+    {
+        $dataBuku = Buku::with(['Kategoribuku'])->orderBy('created_at', 'desc')->paginate(10);
+        return view('Buku.laporanbuku', compact('dataBuku'));
+    }
+
+    public function generatebukuPdf()
+    {
+        $buku = Buku::all();
+        //dd($buku); 
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        // Set paper size and orientation (landscape)
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Load HTML content
+        $html = view('Buku.laporanpdf', compact('buku'))->render();
+        $dompdf->loadHtml($html);
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF (inline or attachment)
+        return $dompdf->stream('Laporanbuku.pdf'); // Inline display
+
+        // $pdf = PDF::loadView('Buku.laporanpdf', compact('buku'));
+        // return $pdf->stream();
+        //return $pdf->download('laporan_buku.pdf');
     }
 
     /**

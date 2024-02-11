@@ -87,25 +87,53 @@
                                     </p>
                                     <div class="flex-grow-1">
                                         <span class="fw-semibold d-block">Deskripsi:</span>
-                                        <p class="mb-0">
+                                        <p class="mb-2">
                                             {!!$bukuShow->Deskripsi!!}
                                         </p>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="{{route('peminjaman.index',$bukuShow->BukuID)}}"
+                                            class="{{$bukuShow->Stock == 0 ? 'btn btn-outline-danger btn-sm disabled' : 'btn btn-outline-primary'}} ">Pinjam
+                                            Buku</a>
                                     </div>
 
                                 </div>
                                 <div class="tab-pane fade" id="navs-justified-ulasan" role="tabpanel">
-                                    <p>
-                                        Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat
-                                        cake ice
-                                        cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread.
-                                        Pastry ice cream
-                                        cheesecake fruitcake.
-                                    </p>
-                                    <p class="mb-0">
-                                        Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie
-                                        tiramisu halvah
-                                        cotton candy liquorice caramels.
-                                    </p>
+                                    @forelse($ulasan as $ulasanItem)
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="{{ asset('assets/img/avatars/1.png') }}"
+                                                class="w-px-50 h-auto rounded-circle" alt="User Photo">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h5 class="mb-0">{{ $ulasanItem->user->Username }}</h5>
+                                            <div class="rating">
+                                                {{-- @php
+                                                $averageRating = $bukuShow->ulasan->avg('Rating');
+                                                @endphp
+                                                @for ($i = 1; $i <= 5; $i++) @if ($i <=$averageRating) <i
+                                                    class="fas fa-star"></i>
+                                                    @elseif ($i - 0.5 <= $averageRating) <i
+                                                        class="fas fa-star-half-alt"></i>
+                                                        @else
+                                                        <i class="far fa-star"></i>
+                                                        @endif
+                                                        @endfor --}}
+                                                        @for ($i = 1; $i <= 5; $i++) @if ($i <=$ulasanItem->Rating)
+                                                            <i class="fas fa-star"></i>
+                                                            @else
+                                                            <i class="far fa-star"></i>
+                                                            <!-- Bintang kosong jika rating < $i - 0.5 -->
+                                                            @endif
+                                                            @endfor
+                                            </div>
+                                            <p>{{ $ulasanItem->Ulasan }}</p>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    <p>Tidak Ada Ulasan</p>
+                                    @endforelse
+
                                 </div>
 
                             </div>

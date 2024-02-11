@@ -224,8 +224,8 @@
           <!-- Extended components -->
           <li class="menu-item">
 
-          <li class="menu-item">
-            <a href="#" class="menu-link">
+          <li class="menu-item {{ (request()->is('laporanbuku')) ? 'active' : '' }}">
+            <a href="{{route('laporanbuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book"></i>
               <div data-i18n="Perfect Scrollbar">Laporan Data Buku</div>
             </a>
