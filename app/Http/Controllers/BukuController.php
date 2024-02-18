@@ -90,7 +90,7 @@ class BukuController extends Controller
         $rules = [
             'KodeBuku'  => 'required',
             'KategoriID' => 'required',
-            'Judul' => 'required|string',
+            'Judul' => 'required|string|unique:tb_buku',
             'Deskripsi' => 'required',
             'Penulis' => 'required|string',
             'Penerbit' => 'required|string',

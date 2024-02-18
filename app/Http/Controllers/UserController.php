@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class UserController extends Controller
 {
@@ -19,6 +21,35 @@ class UserController extends Controller
         return view('User.index', compact('dataUser'));
     }
 
+    public function indexReport()
+    {
+        $dataUser = User::orderBy('created_at', 'desc')->paginate(10);
+        return view('User.laporanindexuser', compact('dataUser'));
+    }
+
+    public function generetereportpdf()
+    {
+        $dataUser = User::all();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        // Set paper size and orientation (landscape)
+        $dompdf->setPaper('A4', 'landscape');
+
+        // Load HTML content
+        $html = view('User.laporanuserpdf', compact('dataUser'))->render();
+        $dompdf->loadHtml($html);
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF (inline or attachment)
+        return $dompdf->stream('LaporanUser.pdf'); // Inline display
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -100,7 +131,7 @@ class UserController extends Controller
         ];
 
         $this->validate($request, $rules);
-        $updateuser= User::findOrFail($id);
+        $updateuser = User::findOrFail($id);
         $updateuser->update([
             'Username' => $request->Username,
             'Namalengkap' => $request->Namalengkap,

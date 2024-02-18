@@ -27,6 +27,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', 'AuthController@showLoginForm')->name('login');
+Route::get('/register', 'AuthController@showRegisterForm')->name('register');
 Route::post('/login-post', 'AuthController@postLogin')->name('login.post');
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
@@ -83,7 +84,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/riwayatpengembalian', 'PeminjamanController@riwayatPengembalian')->name('peminjaman.riwayatPengembalian');
     Route::post('/kembalikanbuku', 'PeminjamanController@kembalikanBuku')->name('peminjaman.kembalikanBuku');
 
-    //Laporanbuku
+    //Laporan
     Route::get('/laporanbuku', 'BukuController@indexReport')->name('laporanbuku.index');
     Route::get('/laporanbuku/pdf', 'BukuController@generatebukuPdf')->name('laporanbuku.pdf');
+    Route::get('/laporanuser', 'UserController@indexReport')->name('laporanuser.index');
+    Route::get('/laporanuser/pdf', 'UserController@generetereportpdf')->name('laporanuser.pdf');
+
+
+    Route::get('/laporanpeminjaman', 'PeminjamanController@indexLaporan')->name('laporanpeminjaman.index');
+    Route::get('/laporanpeminjaman/filter', 'PeminjamanController@filter')->name('laporanpeminjaman.filter');
+    Route::post('/laporanpeminjaman/pdf', 'PeminjamanController@peminjamanReportPdf')->name('laporanpeminjaman.peminjamanpdf');
 });

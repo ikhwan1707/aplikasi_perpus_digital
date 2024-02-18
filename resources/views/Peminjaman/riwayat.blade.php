@@ -33,7 +33,7 @@
                     <th>Tanggal Pengembalian</th>
                     <th>Status</th>
                     <th>Aksi</th>
-    
+
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -43,7 +43,14 @@
                     <td>{{ $peminjaman->user->Username }}</td>
                     <td>{{ $peminjaman->buku->Judul }}</td>
                     <td>{{ $peminjaman->TanggalPeminjaman }}</td>
-                    <td>{{ $peminjaman->TanggalPengembalian }}</td>
+                    <td>
+                        @if(\Carbon\Carbon::now()->toDateString() >= $peminjaman->TanggalPengembalian)
+                        {{ $peminjaman->TanggalPengembalian}} <span class="badge bg-white text-danger">Terlambat</span>
+                        @else
+                        {{ $peminjaman->TanggalPengembalian}}
+                        @endif
+                        {{-- {{ $peminjaman->TanggalPengembalian }} {{ \Carbon\Carbon::now()->toDateString() }} --}}
+                    </td>
                     <td>{{ $peminjaman->StatusPeminjaman }}</td>
                     <td>
                         @if($peminjaman->StatusPeminjaman == 'dipinjam')

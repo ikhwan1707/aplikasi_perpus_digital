@@ -37,7 +37,7 @@ class KategoribukuController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'NamaKategori'  => 'required',
+            'NamaKategori'  => 'required|unique:tb_kategoribuku',
         ];
 
         $this->validate($request, $rules);

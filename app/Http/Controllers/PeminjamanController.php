@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Buku;
 use App\Peminjaman;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use PDF;
 
 class PeminjamanController extends Controller
 {
@@ -20,10 +23,77 @@ class PeminjamanController extends Controller
         return view('Peminjaman.index', compact('buku'));
     }
 
+    public function indexLaporan()
+    {
+        $startDate = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
+        $endDate = Carbon::now()->endOfMonth()->format('Y-m-d H:i:s');
+
+        if (request()->date != '') {
+
+            $date = explode(' - ', request()->date);
+            $startDate = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
+            $endDate = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
+        }
+
+        $peminjaman = Peminjaman::with(['user', 'buku'])->whereBetween('created_at', [$startDate, $endDate])->get();
+
+        return view('Peminjaman.laporanindex', compact('peminjaman', 'startDate', 'endDate'));
+    }
+
+    public function filter(Request $request)
+    {
+        $dateRange = $request->input('date_range');
+        $date = explode(' - ', $dateRange);
+
+        $startDate = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
+        $endDate = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
+
+        $peminjaman = Peminjaman::with(['user', 'buku'])->whereBetween('created_at', [$startDate, $endDate])->get();
+
+        return view('Peminjaman.laporanindex', compact('peminjaman', 'startDate', 'endDate'));
+    }
+
+    public function peminjamanReportPdf(Request $request)
+    {
+
+        // $date = explode('+', $daterange); //EXPLODE TANGGALNYA UNTUK MEMISAHKAN START & END
+        // //DEFINISIKAN VARIABLENYA DENGAN FORMAT TIMESTAMPS
+        // $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
+        // $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $tanggalBulanTahunawal = date("Y-m-d", strtotime($startDate));
+        $tanggalBulanTahunakhir = date("Y-m-d", strtotime($endDate));
+
+        $peminjaman = Peminjaman::with(['user', 'buku'])->whereBetween('created_at', [$startDate, $endDate])->get();
+
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        // Set paper size and orientation (landscape)
+        $dompdf->setPaper('A4', 'landscape');
+
+        $html = view('peminjaman.peminjamanpdf', compact('peminjaman', 'tanggalBulanTahunawal', 'tanggalBulanTahunakhir'))->render();
+        $dompdf->loadHtml($html);
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Output the generated PDF (inline or attachment)
+        $namaFile = 'LaporanPeminjamanPeriode_' . $tanggalBulanTahunawal . '_' . $tanggalBulanTahunakhir . '.pdf';
+        return $dompdf->stream($namaFile); // Inline display
+
+        //dd($peminjaman);
+    }
+
     public function riwayatPeminjaman()
     {
-        $datapeminjam = Peminjaman::where('StatusPeminjaman', 'dipinjam')->get();
-
+        $datapeminjam = Peminjaman::where('StatusPeminjaman', 'dipinjam')->orderBy('created_at','desc')->get();
+        
         return view('Peminjaman.riwayat', compact('datapeminjam'));
     }
 
@@ -32,6 +102,7 @@ class PeminjamanController extends Controller
         $datapengembalian = Peminjaman::where('StatusPeminjaman', 'dikembalikan')->orderBy('created_at', 'desc')->paginate(10);
         return view('Peminjaman.pengembalian', compact('datapengembalian'));
     }
+
     public function pinjamBuku(Request $request)
     {
         //dd($request);
@@ -66,7 +137,8 @@ class PeminjamanController extends Controller
 
         // Tentukan tanggal pengembalian
         $tanggalPengembalian = Carbon::now()->addDays(7);
-
+        $tglkembali = Carbon::parse($tanggalPengembalian)->format('d-m-Y');
+        //dd($tglkembali);
         // Simpan peminjaman
         Peminjaman::create([
             'UserID' => $request->UserID,
@@ -84,7 +156,7 @@ class PeminjamanController extends Controller
             $buku->update(['Status' => 'Tidak tersedia']);
         }
 
-        return redirect(route('ulasan.index'))->with('success', 'Buku berhasil dipinjam.');
+        return redirect(route('ulasan.index'))->with('success', 'Buku berhasil dipinjam, Silahkan Kembalikan Buku Pada Tanggal ' . $tglkembali);
     }
 
     public function kembalikanBuku(Request $request)
@@ -112,7 +184,10 @@ class PeminjamanController extends Controller
         // Tambahkan stok buku
         $buku = Buku::find($peminjaman->BukuID);
         $buku->increment('Stock');
-
+        if ($buku->Stock >= 0) {
+            // Jika stok habis, ubah status buku menjadi tidak tersedia
+            $buku->update(['Status' => 'Tersedia']);
+        }
         // Update tanggal pengembalian aktual
 
         // $peminjaman->update(['Tanggalpengembalianaktual' => $tanggalPengembalianAktual]);

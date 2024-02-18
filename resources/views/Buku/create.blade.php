@@ -8,6 +8,16 @@
                 <small class="text-muted float-end"></small>
             </div>
             <div class="card-body">
+                @if(count($errors) > 0)
+                <div class="alert alert-danger alert-dismissible" role="alert" id="notification">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <form action="{{ route('buku.store')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row mb-3">
@@ -15,9 +25,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Kode Buku" name="KodeBuku"
                                 value="{{old('KodeBuku')}}">
-                            @error('KodeBuku')
+                            {{-- @error('KodeBuku')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -25,9 +35,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" placeholder="Judul Buku" name="Judul"
                                 value="{{old('Judul')}}">
-                            @error('Judul')
+                            {{-- @error('Judul')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -39,9 +49,9 @@
                                 <option value="{{ $kategori->KategoriID }}">{{ $kategori->NamaKategori}}</option>
                                 @endforeach
                             </select>
-                            @error('KategoriID')
+                            {{-- @error('KategoriID')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -49,9 +59,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="Penulis" placeholder="Penulis"
                                 value="{{ old('Penulis') }}">
-                            @error('Penulis')
+                            {{-- @error('Penulis')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -59,9 +69,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="Penerbit" placeholder="Penerbit"
                                 value="{{ old('Penerbit') }}">
-                            @error('Penerbit')
+                            {{-- @error('Penerbit')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -69,9 +79,9 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="TahunTerbit" maxlength="4"
                                 value="{{ old('TahunTerbit') }}">
-                            @error('TahunTerbit')
+                            {{-- @error('TahunTerbit')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -79,18 +89,18 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="Stock" placeholder="Stock"
                                 value="{{ old('Stock') }}">
-                            @error('Stock')
+                            {{-- @error('Stock')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="Image" class="col-sm-2 col-form-label">Gambar</label>
                         <div class="col-sm-10">
                             <input type="file" name="Image" class="form-control" value="{{ old('Image') }}">
-                            @error('Image')
+                            {{-- @error('Image')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -98,9 +108,9 @@
                         <div class="col-sm-10">
                             <textarea class="form-control" name="Deskripsi" id="Deskripsi"
                                 placeholder="Deskripsi Buku">{{old('Deskripsi')}}</textarea>
-                            @error('Deskripsi')
+                            {{-- @error('Deskripsi')
                             <div style="color: red;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                         </div>
                     </div>
 

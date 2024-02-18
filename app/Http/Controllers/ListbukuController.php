@@ -31,6 +31,7 @@ class ListbukuController extends Controller
         $Buku = $query->with(['Koleksipribadi', 'peminjaman' => function ($query) use ($userID) {
             $query->where('UserID', $userID);
         }])->get();
+        //dd($Buku);
         // foreach ($Buku as $buku) {
         //     dd($buku->peminjaman->first()->StatusPeminjaman);    
         // }

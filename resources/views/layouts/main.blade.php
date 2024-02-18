@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   <!-- Page CSS -->
   <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-misc.css')}}" />
+
   <!-- Helpers -->
   <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -143,40 +144,40 @@
           </li>
           @if(Str::length(auth()->user()) > 0)
           @if(auth()->user()->Role == "admin")
-          <li class="menu-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
+          <li class="menu-item {{request()->segment(1) === 'dashboard' ? 'active' : '' }}">
             <a href="/dashboard" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
 
-          <li class="menu-item {{ (request()->is('kategoribuku')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'kategoribuku' ? 'active' : '' }}">
             <a href="{{route('kategoribuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-category"></i>
               <div data-i18n="Kategori">Kategori Buku</div>
             </a>
           </li>
-          <li class="menu-item {{ (request()->is('buku')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'buku' ? 'active' : '' }}">
             <a href="{{route('buku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book"></i>
               <div data-i18n="Book">Buku</div>
             </a>
           </li>
 
-          <li class="menu-item {{ (request()->is('user')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'user' ? 'active' : '' }}">
             <a href="{{route('user.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-user"></i>
               <div data-i18n="User">User</div>
             </a>
           </li>
-          <li class="menu-item {{ (request()->is('riwayatpeminjaman')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'riwayatpeminjaman' ? 'active' : '' }}">
             <a href="{{route('peminjaman.riwayatPeminjaman')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-reader"></i>
               <div data-i18n="Analytics">Peminjaman Buku</div>
             </a>
           </li>
 
-          <li class="menu-item {{ (request()->is('riwayatpengembalian')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'riwayatpengembalian' ? 'active' : '' }}">
             <a href="{{ route('peminjaman.riwayatPengembalian') }}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-log-out"></i>
               <div data-i18n="Analytics">Pengembalian Buku</div>
@@ -186,19 +187,19 @@
 
           {{-- @if(auth()->user()->Role == "user") --}}
           @else
-          <li class="menu-item {{ (request()->is('ulasan')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'ulasan' ? 'active' : '' }}">
             <a href="{{route('ulasan.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
               <div data-i18n="Book">Riwayat Peminjaman</div>
             </a>
           </li>
-          <li class="menu-item {{ (request()->is('koleksibuku')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'koleksibuku' ? 'active' : '' }}">
             <a href="{{route('koleksibuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-bookmark"></i>
               <div data-i18n="Book">Koleksi Buku</div>
             </a>
           </li>
-          <li class="menu-item {{ (request()->is('listbuku')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'listbuku' ? 'active' : '' }}">
             <a href="/listbuku" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-ul"></i>
               <div data-i18n="Book">List Buku</div>
@@ -224,20 +225,20 @@
           <!-- Extended components -->
           <li class="menu-item">
 
-          <li class="menu-item {{ (request()->is('laporanbuku')) ? 'active' : '' }}">
+          <li class="menu-item {{ request()->segment(1) === 'laporanbuku' ? 'active' : '' }}">
             <a href="{{route('laporanbuku.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book"></i>
               <div data-i18n="Perfect Scrollbar">Laporan Data Buku</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="#" class="menu-link">
+          <li class="menu-item {{ request()->segment(1) === 'laporanuser' ? 'active' : '' }}">
+            <a href="{{route('laporanuser.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-user"></i>
               <div data-i18n="Text Divider">Laporan Data User</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="#" class="menu-link">
+          <li class="menu-item {{ request()->segment(1) === 'laporanpeminjaman' ? 'active' : '' }}">
+            <a href="{{route('laporanpeminjaman.index')}}" class="menu-link">
               <i class="menu-icon tf-icons bx bx-book-reader"></i>
               <div data-i18n="Text Divider">Laporan Data Peminjaman</div>
             </a>
@@ -387,20 +388,14 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js')}}"></script>
-  {{-- <script>
-    $(document).ready(function() {
-      $('.menu-item').click(function() {
-        $('.menu-item').removeClass('active');
-        $(this).addClass('active');
-      });
-    });
-  </script> --}}
+
   <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
   <script>
     setTimeout(function() {
                     document.getElementById('notification').style.display = 'none';
-                }, 5000); // Menutup notifikasi setelah 5 detik (5000 milidetik)
+                }, 10000); // Menutup notifikasi setelah 5 detik (5000 milidetik)
   </script>
+
   @yield('js')
 </body>
 

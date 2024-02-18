@@ -15,6 +15,10 @@ class AuthController extends Controller
         return view('Authentications.login');
     }
 
+    public function showRegisterForm()
+    {
+        return view('Authentications.registrasi');
+    }
     public function postLogin(Request $request)
     {
         $request->validate([
@@ -36,6 +40,7 @@ class AuthController extends Controller
         }
     }
 
+    
     public function logout()
     {
         Session::flush();
